@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "message_for_years",
+  "info": {
+    "singularName": "message-for-year",
+    "pluralName": "message-for-years",
+    "displayName": "Message For Year",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "last_speeches",
+  "info": {
+    "singularName": "last-speech",
+    "pluralName": "last-speeches",
+    "displayName": "Last Speeches",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

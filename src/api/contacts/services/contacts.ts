@@ -1,0 +1,5 @@
+/**
+ * contacts service
+ */
+
+export default () => ({});
