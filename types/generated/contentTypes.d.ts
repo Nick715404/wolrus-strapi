@@ -840,10 +840,13 @@ export interface ApiCalendarCalendar extends Schema.CollectionType {
   };
   attributes: {
     date_number: Attribute.String & Attribute.Required;
-    time: Attribute.String & Attribute.Required;
     month: Attribute.String & Attribute.Required;
     day: Attribute.String & Attribute.Required;
-    title: Attribute.String & Attribute.Required;
+    calendar_items: Attribute.Relation<
+      'api::calendar.calendar',
+      'oneToMany',
+      'api::calendar-item.calendar-item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -854,6 +857,42 @@ export interface ApiCalendarCalendar extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::calendar.calendar',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCalendarItemCalendarItem extends Schema.CollectionType {
+  collectionName: 'calendar_items';
+  info: {
+    singularName: 'calendar-item';
+    pluralName: 'calendar-items';
+    displayName: 'Calendar Item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    time: Attribute.Time & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    calendar: Attribute.Relation<
+      'api::calendar-item.calendar-item',
+      'manyToOne',
+      'api::calendar.calendar'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::calendar-item.calendar-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::calendar-item.calendar-item',
       'oneToOne',
       'admin::user'
     > &
@@ -1101,6 +1140,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::calendar.calendar': ApiCalendarCalendar;
+      'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
       'api::event.event': ApiEventEvent;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;

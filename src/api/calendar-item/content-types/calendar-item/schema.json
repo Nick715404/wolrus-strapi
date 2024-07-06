@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "calendar_items",
+  "info": {
+    "singularName": "calendar-item",
+    "pluralName": "calendar-items",
+    "displayName": "Calendar Item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "time": {
+      "type": "time",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "calendar": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::calendar.calendar",
+      "inversedBy": "calendar_items"
+    }
+  }
+}

@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "time": {
-      "type": "string",
-      "required": true
-    },
     "month": {
       "type": "string",
       "required": true
@@ -28,9 +24,11 @@
       "type": "string",
       "required": true
     },
-    "title": {
-      "type": "string",
-      "required": true
+    "calendar_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::calendar-item.calendar-item",
+      "mappedBy": "calendar"
     }
   }
 }
