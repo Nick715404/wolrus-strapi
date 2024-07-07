@@ -1,5 +1,5 @@
 import { factories } from '@strapi/strapi';
-import { TPaymentBody, TPaymentStatus } from '../content-types/order.types';
+import { TDonationBody, TPaymentBody, TPaymentStatus } from '../content-types/order.types';
 import { generateEmail, sendTelegramMessage } from '../../../utils/email';
 const YooKassa = require('yookassa');
 const nodemailer = require('nodemailer');
@@ -34,7 +34,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
         },
         confirmation: {
           type: "redirect",
-          return_url: "http://localhost:3000/thanks"
+          return_url: "https://chel.wolrus.org/thanks"
         },
         description: frontData.description,
         metadata: {
@@ -44,6 +44,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
           phone: frontData.phone,
           church: frontData.church,
           city: frontData.city,
+          isDonation: 'false',
         }
       });
       return payment.confirmation.confirmation_url as string;
@@ -55,31 +56,62 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
   async paymentStatus(ctx) {
     const paymentData = ctx.request.body as TPaymentStatus;
 
+    console.log(paymentData);
+
     if (paymentData.event !== 'payment.waiting_for_capture') return;
 
     try {
       const payment = await yooKassa.capturePayment(paymentData.object.id);
 
-      // Отправка email после успешного платежа
-      const mailOptions = {
-        from: `"Церковь Слово Жизни г. Челябинск" ${process.env.EMAIL_USER}`,
-        to: paymentData.object.metadata.email,
-        subject: 'Регистрация', // - заголовок сообщения
-        text: 'Спасибо за регистрацию на событие!', // - превью сообщения
-        html: generateEmail({
-          firstName: paymentData.object.metadata.firstName,
-          lastName: paymentData.object.metadata.lastName
-        }), // - сообщение
-      };
+      if (paymentData.object.metadata.isDonation === 'false') {
 
-      await sendTelegramMessage(paymentData);
-      await transporter.sendMail(mailOptions);
+        const mailOptions = {
+          from: `"Церковь Слово Жизни г. Челябинск" ${process.env.EMAIL_USER}`,
+          to: paymentData.object.metadata.email,
+          subject: 'Регистрация',
+          text: 'Спасибо за регистрацию на событие!',
+          html: generateEmail({
+            firstName: paymentData.object.metadata.firstName,
+            lastName: paymentData.object.metadata.lastName
+          }),
+        };
 
-      console.log('Email sent successfully');
+        await sendTelegramMessage(paymentData);
+        await transporter.sendMail(mailOptions);
+      }
+
       return payment.status;
     } catch (error) {
       console.error('Payment capture error:', error);
       ctx.throw(400, error);
     }
-  }
+  },
+  async donationPayment(ctx) {
+    const data = ctx.request.body;
+
+    try {
+      const payment = await yooKassa.createPayment({
+        amount: {
+          value: data.price.toFixed(2),
+          currency: "RUB"
+        },
+        payment_method_data: {
+          type: "bank_card"
+        },
+        confirmation: {
+          type: "redirect",
+          return_url: "https://chel.wolrus.org/thanks"
+        },
+        description: "Добровольное пожертвование",
+        metadata: {
+          isDonation: 'true',
+        }
+      });
+
+      return payment.confirmation.confirmation_url as string;
+    } catch (error) {
+      console.error('Payment creation error:', error);
+      ctx.throw(400, error);
+    }
+  },
 }));

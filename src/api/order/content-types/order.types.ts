@@ -8,6 +8,11 @@ export type TPaymentBody = {
   firstName: string,
   lastName: string,
   phone: string,
+  type: string,
+};
+
+export type TDonationBody = {
+  price: number,
 };
 
 export type TPaymentStatus = {
@@ -33,12 +38,13 @@ export type TPaymentObject = {
 }
 
 export type TPaymentMetadata = {
-  email: string, 
-  firstName: string, 
-  lastName: string,
-  value: string,
-  description: string,
-  phone: string,
-  church: string,
-  city: string,
+  email?: string, 
+  firstName?: string, 
+  lastName?: string,
+  value?: string,
+  description?: string,
+  phone?: string,
+  church?: string,
+  city?: string,
+  isDonation: string,
 }

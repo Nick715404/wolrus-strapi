@@ -36,8 +36,6 @@ export async function sendTelegramMessage(message: TPaymentStatus) {
   const telegramChatId = process.env.TELEGRAM_CHAT_ID;
   const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
 
-  console.log(message);
-
   const telegramMessage = `Новый платеж:
   Имя: ${message.object.metadata.firstName} ${message.object.metadata.lastName}
   Email: ${message.object.metadata.email}

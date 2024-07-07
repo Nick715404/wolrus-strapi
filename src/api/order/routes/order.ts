@@ -18,5 +18,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'POST',
+      path: '/orders/donation',
+      handler: 'order.donationPayment',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };
