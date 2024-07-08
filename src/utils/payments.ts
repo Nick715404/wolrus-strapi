@@ -3,8 +3,8 @@ import { TPaymentBody } from "../api/order/content-types/order.types";
 const YooKassa = require('yookassa');
 
 const yooKassa = new YooKassa({
-  shopId: process.env.YOOKASSA_FAKE_SHOP,
-  secretKey: process.env.YOOKASSA_FAKE_SECRET,
+  shopId: process.env.YOOKASSA_SHOP,
+  secretKey: process.env.YOOKASSA_SECRET,
 });
 
 export const getPayment = async (frontData: TPaymentBody) => {
