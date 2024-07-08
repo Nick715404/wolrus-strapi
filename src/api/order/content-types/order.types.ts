@@ -1,5 +1,4 @@
 export type TPaymentBody = {
-  description: string,
   price: number,
   email: string,
   agreement: boolean,
@@ -8,7 +7,7 @@ export type TPaymentBody = {
   firstName: string,
   lastName: string,
   phone: string,
-  type: string,
+  eventType: string,
 };
 
 export type TDonationBody = {
@@ -42,9 +41,9 @@ export type TPaymentMetadata = {
   firstName?: string, 
   lastName?: string,
   value?: string,
-  description?: string,
   phone?: string,
   church?: string,
   city?: string,
   isDonation: string,
+  eventType: 'юсурал' | 'бизнес',
 }

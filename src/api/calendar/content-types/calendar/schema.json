@@ -26,9 +26,9 @@
     },
     "calendar_items": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::calendar-item.calendar-item",
-      "mappedBy": "calendar"
+      "mappedBy": "calendars"
     }
   }
 }

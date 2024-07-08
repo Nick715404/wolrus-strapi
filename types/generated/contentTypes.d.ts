@@ -844,7 +844,7 @@ export interface ApiCalendarCalendar extends Schema.CollectionType {
     day: Attribute.String & Attribute.Required;
     calendar_items: Attribute.Relation<
       'api::calendar.calendar',
-      'oneToMany',
+      'manyToMany',
       'api::calendar-item.calendar-item'
     >;
     createdAt: Attribute.DateTime;
@@ -878,9 +878,9 @@ export interface ApiCalendarItemCalendarItem extends Schema.CollectionType {
   attributes: {
     time: Attribute.Time & Attribute.Required;
     title: Attribute.String & Attribute.Required;
-    calendar: Attribute.Relation<
+    calendars: Attribute.Relation<
       'api::calendar-item.calendar-item',
-      'manyToOne',
+      'manyToMany',
       'api::calendar.calendar'
     >;
     createdAt: Attribute.DateTime;

@@ -20,9 +20,9 @@
       "type": "string",
       "required": true
     },
-    "calendar": {
+    "calendars": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::calendar.calendar",
       "inversedBy": "calendar_items"
     }
