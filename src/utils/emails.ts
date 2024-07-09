@@ -34,6 +34,12 @@ export const generateEmailInstanse = async ({ email, firstName, htmlGenerator, l
 
 export const emailsPipe = async (data: TPaymentStatus) => {
   try {
+    if (!data.object.metadata.email) {
+      console.log('No email recipient defined, skipping email sending.');
+      return;
+    }
+    console.log(data.object.metadata.email)
+    console.log('run emails')
     let emailOptions;
     switch (data.object.metadata.eventType) {
       case 'юсурал':
@@ -60,6 +66,10 @@ export const emailsPipe = async (data: TPaymentStatus) => {
     return info;
   }
   catch (error) {
-    throw error;
+    if (error.response && error.response.includes('550')) {
+      console.error('Invalid email address.');
+      return;
+    }
+    return;
   }
 };

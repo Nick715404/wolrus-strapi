@@ -22,6 +22,9 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
 
     try {
       const payment = await getPeymentStatus(paymentData.object.id);
+
+      console.log(payment);
+
       if (paymentData.object.metadata.isDonation === 'false') {
         await sendTelegramMessage(paymentData);
         await emailsPipe(paymentData);
