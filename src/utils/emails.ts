@@ -38,11 +38,9 @@ export const emailsPipe = async (data: TPaymentStatus) => {
       console.log('No email recipient defined, skipping email sending.');
       return;
     }
-    console.log(data.object.metadata.email)
-    console.log('run emails')
     let emailOptions;
-    switch (data.object.metadata.eventType) {
-      case 'юсурал':
+    switch (data.object.metadata.type) {
+      case 'youthUral':
         emailOptions = await generateEmailInstanse({
           email: data.object.metadata.email,
           firstName: data.object.metadata.firstName,
@@ -50,7 +48,7 @@ export const emailsPipe = async (data: TPaymentStatus) => {
           htmlGenerator: EMAILS.youthUral,
         });
         break;
-      case "бизнес":
+      case "business":
         emailOptions = await generateEmailInstanse({
           email: data.object.metadata.email,
           firstName: data.object.metadata.firstName,
@@ -59,7 +57,7 @@ export const emailsPipe = async (data: TPaymentStatus) => {
         });
         break;
       default:
-        throw new Error(`Unknown eventType: ${data.object.metadata.eventType}`);
+        throw new Error(`Unknown eventType: ${data.object.metadata.type}`);
     }
 
     const info = await transporter.sendMail(emailOptions);

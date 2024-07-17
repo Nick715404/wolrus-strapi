@@ -1,4 +1,4 @@
-import { TPaymentBody } from "../api/order/content-types/order.types";
+import { TFormData, TPaymentBodyYouth, TPaymentBodyBussines } from "../api/order/content-types/order.types";
 
 const YooKassa = require('yookassa');
 
@@ -7,7 +7,45 @@ const yooKassa = new YooKassa({
   secretKey: process.env.YOOKASSA_SECRET,
 });
 
-export const getPayment = async (frontData: TPaymentBody) => {
+const metadataGenerator = (data: TFormData) => {
+  switch (data.type) {
+    case 'youthUral': {
+      const youthData = data as TPaymentBodyYouth;
+      return {
+        firstName: youthData.firstName,
+        lastName: youthData.lastName,
+        email: youthData.email,
+        phone: youthData.phone,
+        church: youthData.church,
+        city: youthData.city,
+        settlement: youthData.settlement,
+        type: youthData.type,
+        isDonation: 'false',
+      };
+    }
+    case 'business': {
+      const businessData = data as TPaymentBodyBussines;
+      return {
+        firstName: businessData.firstName,
+        lastName: businessData.lastName,
+        email: businessData.email,
+        phone: businessData.phone,
+        church: businessData.church,
+        city: businessData.city,
+        career: businessData.career,
+        type: businessData.type,
+        role: businessData.role,
+        isDonation: 'false',
+      };
+    }
+    default:
+      throw new Error('Unsupported form type');
+  }
+};
+
+export const getPayment = async (frontData: TFormData) => {
+  const metadataObject = metadataGenerator(frontData);
+
   const response = await yooKassa.createPayment({
     amount: {
       value: frontData.price.toFixed(2),
@@ -21,16 +59,7 @@ export const getPayment = async (frontData: TPaymentBody) => {
       return_url: "https://chel.wolrus.org/thanks"
     },
     description: "Добровольное пожертвование",
-    metadata: {
-      firstName: frontData.firstName,
-      lastName: frontData.lastName,
-      email: frontData.email,
-      phone: frontData.phone,
-      church: frontData.church,
-      city: frontData.city,
-      eventType: frontData.eventType,
-      isDonation: 'false',
-    }
+    metadata: metadataObject,
   });
   return response;
 }

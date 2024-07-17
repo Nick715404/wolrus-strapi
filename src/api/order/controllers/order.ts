@@ -1,12 +1,12 @@
 import { factories } from '@strapi/strapi';
-import { TPaymentBody, TPaymentStatus } from '../content-types/order.types';
-import { sendTelegramMessage } from '../../../utils/email.utils';
+import { TFormData, TPaymentStatus } from '../content-types/order.types';
 import { getDonationPayment, getPayment, getPeymentStatus } from '../../../utils/payments';
 import { emailsPipe } from '../../../utils/emails';
+import { airtablePipe } from '../../../utils/airtable';
 
 export default factories.createCoreController('api::order.order', ({ strapi }) => ({
   async payment(ctx) {
-    const frontData = ctx.request.body as TPaymentBody;
+    const frontData = ctx.request.body as TFormData;
     try {
       const payment = await getPayment(frontData);
       return payment.confirmation.confirmation_url as string;
@@ -23,11 +23,9 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
     try {
       const payment = await getPeymentStatus(paymentData.object.id);
 
-      console.log(payment);
-
       if (paymentData.object.metadata.isDonation === 'false') {
-        await sendTelegramMessage(paymentData);
         await emailsPipe(paymentData);
+        await airtablePipe(paymentData);
       }
 
       return payment.status;

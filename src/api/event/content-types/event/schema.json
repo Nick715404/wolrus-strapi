@@ -41,27 +41,11 @@
         "images"
       ]
     },
-    "reg_price": {
-      "type": "integer"
-    },
     "speakers": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::speaker.speaker",
       "mappedBy": "event"
-    },
-    "increase_date": {
-      "type": "string",
-      "required": false
-    },
-    "increase_price": {
-      "required": false,
-      "type": "float"
-    },
-    "event_type": {
-      "type": "string",
-      "required": true,
-      "default": "default"
     },
     "schedules": {
       "type": "relation",
@@ -71,6 +55,23 @@
     },
     "full_description": {
       "type": "blocks"
+    },
+    "event_type": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "uralFaithCond",
+        "youthUral",
+        "teensUral",
+        "business",
+        "worshipConf"
+      ]
+    },
+    "event_items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-item.event-item",
+      "inversedBy": "events"
     }
   }
 }

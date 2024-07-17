@@ -917,23 +917,32 @@ export interface ApiEventEvent extends Schema.CollectionType {
     slug: Attribute.UID<'api::event.event', 'title'> & Attribute.Required;
     background: Attribute.Media & Attribute.Required;
     gallery: Attribute.Media;
-    reg_price: Attribute.Integer;
     speakers: Attribute.Relation<
       'api::event.event',
       'oneToMany',
       'api::speaker.speaker'
     >;
-    increase_date: Attribute.String;
-    increase_price: Attribute.Float;
-    event_type: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'default'>;
     schedules: Attribute.Relation<
       'api::event.event',
       'oneToMany',
       'api::schedule.schedule'
     >;
     full_description: Attribute.Blocks;
+    event_type: Attribute.Enumeration<
+      [
+        'default',
+        'uralFaithCond',
+        'youthUral',
+        'teensUral',
+        'business',
+        'worshipConf'
+      ]
+    >;
+    event_items: Attribute.Relation<
+      'api::event.event',
+      'manyToMany',
+      'api::event-item.event-item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -945,6 +954,47 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventItemEventItem extends Schema.CollectionType {
+  collectionName: 'event_items';
+  info: {
+    singularName: 'event-item';
+    pluralName: 'event-items';
+    displayName: 'Event-item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    events: Attribute.Relation<
+      'api::event-item.event-item',
+      'manyToMany',
+      'api::event.event'
+    >;
+    price: Attribute.BigInteger & Attribute.Required;
+    increased_price_date: Attribute.Date;
+    increase_price: Attribute.BigInteger;
+    paymentType: Attribute.Enumeration<
+      ['standart', 'businessMan', 'startupper', 'pastor']
+    > &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-item.event-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-item.event-item',
       'oneToOne',
       'admin::user'
     > &
@@ -1142,6 +1192,7 @@ declare module '@strapi/types' {
       'api::calendar.calendar': ApiCalendarCalendar;
       'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
       'api::event.event': ApiEventEvent;
+      'api::event-item.event-item': ApiEventItemEventItem;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::order.order': ApiOrderOrder;

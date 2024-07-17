@@ -1,3 +1,7 @@
+export type TFormData = TPaymentBodyYouth | TPaymentBodyBussines;
+
+export type IFormType = 'uralFaithCond' | 'youthUral' | 'teensUral' | 'business' | 'worshipConf' | 'default';
+
 export type TPaymentBody = {
   price: number,
   email: string,
@@ -7,8 +11,17 @@ export type TPaymentBody = {
   firstName: string,
   lastName: string,
   phone: string,
-  eventType: string,
+  type: IFormType,
 };
+
+export type TPaymentBodyYouth = TPaymentBody & {
+  settlement?: string,
+}
+
+export type TPaymentBodyBussines = TPaymentBody & {
+  career?: string,
+  role: string,
+}
 
 export type TDonationBody = {
   price: number,
@@ -36,14 +49,4 @@ export type TPaymentObject = {
   metadata: TPaymentMetadata,
 }
 
-export type TPaymentMetadata = {
-  email?: string, 
-  firstName?: string, 
-  lastName?: string,
-  value?: string,
-  phone?: string,
-  church?: string,
-  city?: string,
-  isDonation: string,
-  eventType: 'юсурал' | 'бизнес',
-}
+export type TPaymentMetadata = (TPaymentBodyYouth | TPaymentBodyBussines) & { isDonation: "false" | "true" }
