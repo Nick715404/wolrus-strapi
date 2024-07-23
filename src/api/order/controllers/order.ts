@@ -9,7 +9,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
     const frontData = ctx.request.body as TFormData;
     try {
       const payment = await getPayment(frontData);
-      return payment.confirmation.confirmation_url as string;
+      ctx.send({ url: payment.confirmation.confirmation_url });
     } catch (error) {
       console.error('Payment creation error:', error);
       ctx.throw(400, error);

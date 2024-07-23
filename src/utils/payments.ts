@@ -56,7 +56,7 @@ export const getPayment = async (frontData: TFormData) => {
     },
     confirmation: {
       type: "redirect",
-      return_url: "https://chel.wolrus.org/thanks"
+      return_url: "https://wolrus-chel.ru/thanks"
     },
     description: "Добровольное пожертвование",
     metadata: metadataObject,
@@ -79,8 +79,8 @@ export const getDonationPayment = async (price: number) => {
       type: "bank_card"
     },
     confirmation: {
-      type: "redirect",
-      return_url: "https://chel.wolrus.org/thanks"
+      type: "embedded",
+      // return_url: "https://chel.wolrus.org/thanks"
     },
     description: "Добровольное пожертвование",
     metadata: {
