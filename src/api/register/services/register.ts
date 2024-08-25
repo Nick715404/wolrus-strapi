@@ -1,5 +1,5 @@
 /**
- * contacts service
+ * register service
  */
 
 export default () => ({});
