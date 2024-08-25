@@ -1,13 +1,15 @@
-export default {
+"use strict";
+
+module.exports = {
   routes: [
-    // {
-    //  method: 'GET',
-    //  path: '/register',
-    //  handler: 'register.exampleAction',
-    //  config: {
-    //    policies: [],
-    //    middlewares: [],
-    //  },
-    // },
+    {
+      method: "POST",
+      path: "/upload",
+      handler: "upload.upload",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };
