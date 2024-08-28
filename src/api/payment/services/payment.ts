@@ -1,5 +1,5 @@
 /**
- * register service
+ * payment service
  */
 
 export default () => ({});

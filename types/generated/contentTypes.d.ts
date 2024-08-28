@@ -900,35 +900,6 @@ export interface ApiCalendarItemCalendarItem extends Schema.CollectionType {
   };
 }
 
-export interface ApiDonationDonation extends Schema.CollectionType {
-  collectionName: 'donations';
-  info: {
-    singularName: 'donation';
-    pluralName: 'donations';
-    displayName: 'Donation';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    awd: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::donation.donation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::donation.donation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiEventEvent extends Schema.CollectionType {
   collectionName: 'events';
   info: {
@@ -1093,38 +1064,6 @@ export interface ApiMessageForYearMessageForYear extends Schema.CollectionType {
   };
 }
 
-export interface ApiOrderOrder extends Schema.CollectionType {
-  collectionName: 'orders';
-  info: {
-    singularName: 'order';
-    pluralName: 'orders';
-    displayName: 'Order';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    amount: Attribute.Float;
-    description: Attribute.Text;
-    status: Attribute.Enumeration<['pending', 'paid', 'failed']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::order.order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::order.order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiScheduleSchedule extends Schema.CollectionType {
   collectionName: 'schedules';
   info: {
@@ -1220,12 +1159,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::calendar.calendar': ApiCalendarCalendar;
       'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
-      'api::donation.donation': ApiDonationDonation;
       'api::event.event': ApiEventEvent;
       'api::event-item.event-item': ApiEventItemEventItem;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
-      'api::order.order': ApiOrderOrder;
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::speaker.speaker': ApiSpeakerSpeaker;
     }
