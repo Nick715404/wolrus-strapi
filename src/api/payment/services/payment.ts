@@ -1,5 +1,0 @@
-/**
- * payment service
- */
-
-export default () => ({});

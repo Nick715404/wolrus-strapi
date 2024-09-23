@@ -928,16 +928,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'api::schedule.schedule'
     >;
     full_description: Attribute.Blocks;
-    event_type: Attribute.Enumeration<
-      [
-        'default',
-        'uralFaithCond',
-        'youthUral',
-        'teensUral',
-        'business',
-        'worshipConf'
-      ]
-    >;
     event_items: Attribute.Relation<
       'api::event.event',
       'manyToMany',

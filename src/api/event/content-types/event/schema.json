@@ -56,17 +56,6 @@
     "full_description": {
       "type": "blocks"
     },
-    "event_type": {
-      "type": "enumeration",
-      "enum": [
-        "default",
-        "uralFaithCond",
-        "youthUral",
-        "teensUral",
-        "business",
-        "worshipConf"
-      ]
-    },
     "event_items": {
       "type": "relation",
       "relation": "manyToMany",
