@@ -975,6 +975,7 @@ export interface ApiEventItemEventItem extends Schema.CollectionType {
       ['standart', 'businessMan', 'startupper', 'pastor']
     > &
       Attribute.Required;
+    form_link: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1060,19 +1061,22 @@ export interface ApiScheduleSchedule extends Schema.CollectionType {
     singularName: 'schedule';
     pluralName: 'schedules';
     displayName: 'Schedule';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     date: Attribute.Date & Attribute.Required;
-    time: Attribute.Time & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    speaker: Attribute.String & Attribute.Required;
     event: Attribute.Relation<
       'api::schedule.schedule',
       'manyToOne',
       'api::event.event'
+    >;
+    schedule_items: Attribute.Relation<
+      'api::schedule.schedule',
+      'manyToMany',
+      'api::schedule-item.schedule-item'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1085,6 +1089,43 @@ export interface ApiScheduleSchedule extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::schedule.schedule',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiScheduleItemScheduleItem extends Schema.CollectionType {
+  collectionName: 'schedule_items';
+  info: {
+    singularName: 'schedule-item';
+    pluralName: 'schedule-items';
+    displayName: 'Schedule-item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    schedules: Attribute.Relation<
+      'api::schedule-item.schedule-item',
+      'manyToMany',
+      'api::schedule.schedule'
+    >;
+    time: Attribute.Time & Attribute.Required;
+    event_description: Attribute.String & Attribute.Required;
+    event_speaker: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::schedule-item.schedule-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::schedule-item.schedule-item',
       'oneToOne',
       'admin::user'
     > &
@@ -1154,6 +1195,7 @@ declare module '@strapi/types' {
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::schedule.schedule': ApiScheduleSchedule;
+      'api::schedule-item.schedule-item': ApiScheduleItemScheduleItem;
       'api::speaker.speaker': ApiSpeakerSpeaker;
     }
   }

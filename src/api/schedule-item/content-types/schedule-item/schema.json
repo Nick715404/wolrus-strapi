@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schedule_items",
+  "info": {
+    "singularName": "schedule-item",
+    "pluralName": "schedule-items",
+    "displayName": "Schedule-item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "schedules": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::schedule.schedule",
+      "inversedBy": "schedule_items"
+    },
+    "time": {
+      "type": "time",
+      "required": true
+    },
+    "event_description": {
+      "type": "string",
+      "required": true
+    },
+    "event_speaker": {
+      "type": "string"
+    }
+  }
+}

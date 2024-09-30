@@ -37,6 +37,9 @@
         "pastor"
       ],
       "required": true
+    },
+    "form_link": {
+      "type": "string"
     }
   }
 }

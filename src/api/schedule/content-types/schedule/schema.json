@@ -4,7 +4,8 @@
   "info": {
     "singularName": "schedule",
     "pluralName": "schedules",
-    "displayName": "Schedule"
+    "displayName": "Schedule",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,23 +16,17 @@
       "required": true,
       "type": "date"
     },
-    "time": {
-      "type": "time",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "speaker": {
-      "type": "string",
-      "required": true
-    },
     "event": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::event.event",
       "inversedBy": "schedules"
+    },
+    "schedule_items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::schedule-item.schedule-item",
+      "mappedBy": "schedules"
     }
   }
 }
