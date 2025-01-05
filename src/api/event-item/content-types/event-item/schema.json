@@ -40,6 +40,14 @@
     },
     "form_link": {
       "type": "string"
+    },
+    "test": {
+      "type": "enumeration",
+      "enum": [
+        "test",
+        "test2",
+        "test3"
+      ]
     }
   }
 }

@@ -976,6 +976,7 @@ export interface ApiEventItemEventItem extends Schema.CollectionType {
     > &
       Attribute.Required;
     form_link: Attribute.String;
+    test: Attribute.Enumeration<['test', 'test2', 'test3']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
