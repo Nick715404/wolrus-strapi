@@ -1056,6 +1056,39 @@ export interface ApiMessageForYearMessageForYear extends Schema.CollectionType {
   };
 }
 
+export interface ApiNearEventNearEvent extends Schema.CollectionType {
+  collectionName: 'near_events';
+  info: {
+    singularName: 'near-event';
+    pluralName: 'near-events';
+    displayName: 'Near Events';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    startDate: Attribute.Date & Attribute.Required;
+    endDate: Attribute.Date & Attribute.Required;
+    backgroundImage: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::near-event.near-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::near-event.near-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiScheduleSchedule extends Schema.CollectionType {
   collectionName: 'schedules';
   info: {
@@ -1195,6 +1228,7 @@ declare module '@strapi/types' {
       'api::event-item.event-item': ApiEventItemEventItem;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
+      'api::near-event.near-event': ApiNearEventNearEvent;
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::schedule-item.schedule-item': ApiScheduleItemScheduleItem;
       'api::speaker.speaker': ApiSpeakerSpeaker;
