@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "yus_urals",
+  "info": {
+    "singularName": "yus-ural",
+    "pluralName": "yus-urals",
+    "displayName": "ЮсУрал",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "home_cover": {
+      "type": "string"
+    },
+    "church": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    }
+  }
+}

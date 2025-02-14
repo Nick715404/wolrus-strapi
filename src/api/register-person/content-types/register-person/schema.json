@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "register_persons",
+  "info": {
+    "singularName": "register-person",
+    "pluralName": "register-persons",
+    "displayName": "Register Persons",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "person_type": {
+      "type": "enumeration",
+      "enum": [
+        "Пастор",
+        "Подросток",
+        "Предприниматель",
+        "Прихожанин"
+      ]
+    },
+    "init_price": {
+      "type": "integer",
+      "required": true
+    },
+    "new_price": {
+      "type": "integer",
+      "required": true
+    },
+    "price_update_date": {
+      "type": "datetime",
+      "required": true
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "register_persons"
+    },
+    "person_title": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "biznes_konferencziyas",
+  "info": {
+    "singularName": "biznes-konferencziya",
+    "pluralName": "biznes-konferencziyas",
+    "displayName": "Бизнес Конференция",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "sur_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "church": {
+      "type": "string"
+    },
+    "occupation": {
+      "type": "string"
+    },
+    "pastor_type": {
+      "type": "string"
+    },
+    "vector": {
+      "type": "string"
+    },
+    "personType": {
+      "type": "string"
+    }
+  }
+}

@@ -827,6 +827,47 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBiznesKonferencziyaBiznesKonferencziya
+  extends Schema.CollectionType {
+  collectionName: 'biznes_konferencziyas';
+  info: {
+    singularName: 'biznes-konferencziya';
+    pluralName: 'biznes-konferencziyas';
+    displayName: '\u0411\u0438\u0437\u043D\u0435\u0441 \u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    sur_name: Attribute.String;
+    phone: Attribute.String;
+    email: Attribute.String;
+    church: Attribute.String;
+    occupation: Attribute.String;
+    pastor_type: Attribute.String;
+    vector: Attribute.String;
+    personType: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::biznes-konferencziya.biznes-konferencziya',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::biznes-konferencziya.biznes-konferencziya',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCalendarCalendar extends Schema.CollectionType {
   collectionName: 'calendars';
   info: {
@@ -928,10 +969,17 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'api::schedule.schedule'
     >;
     full_description: Attribute.Blocks;
-    event_items: Attribute.Relation<
+    event_type: Attribute.Enumeration<
+      [
+        '\u042E\u0441\u0423\u0440\u0430\u043B',
+        '\u0422\u0438\u043D\u0441\u0423\u0440\u0430\u043B',
+        '\u0411\u0438\u0437\u043D\u0435\u0441\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F'
+      ]
+    >;
+    register_persons: Attribute.Relation<
       'api::event.event',
       'manyToMany',
-      'api::event-item.event-item'
+      'api::register-person.register-person'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -944,49 +992,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::event.event',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEventItemEventItem extends Schema.CollectionType {
-  collectionName: 'event_items';
-  info: {
-    singularName: 'event-item';
-    pluralName: 'event-items';
-    displayName: 'Event-item';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    events: Attribute.Relation<
-      'api::event-item.event-item',
-      'manyToMany',
-      'api::event.event'
-    >;
-    price: Attribute.BigInteger & Attribute.Required;
-    increased_price_date: Attribute.Date;
-    increase_price: Attribute.BigInteger;
-    paymentType: Attribute.Enumeration<
-      ['standart', 'businessMan', 'startupper', 'pastor']
-    > &
-      Attribute.Required;
-    form_link: Attribute.String;
-    test: Attribute.Enumeration<['test', 'test2', 'test3']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::event-item.event-item',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::event-item.event-item',
       'oneToOne',
       'admin::user'
     > &
@@ -1082,6 +1087,53 @@ export interface ApiNearEventNearEvent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::near-event.near-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRegisterPersonRegisterPerson extends Schema.CollectionType {
+  collectionName: 'register_persons';
+  info: {
+    singularName: 'register-person';
+    pluralName: 'register-persons';
+    displayName: 'Register Persons';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    person_type: Attribute.Enumeration<
+      [
+        '\u041F\u0430\u0441\u0442\u043E\u0440',
+        '\u041F\u043E\u0434\u0440\u043E\u0441\u0442\u043E\u043A',
+        '\u041F\u0440\u0435\u0434\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C',
+        '\u041F\u0440\u0438\u0445\u043E\u0436\u0430\u043D\u0438\u043D'
+      ]
+    >;
+    init_price: Attribute.Integer & Attribute.Required;
+    new_price: Attribute.Integer & Attribute.Required;
+    price_update_date: Attribute.DateTime & Attribute.Required;
+    events: Attribute.Relation<
+      'api::register-person.register-person',
+      'manyToMany',
+      'api::event.event'
+    >;
+    person_title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::register-person.register-person',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::register-person.register-person',
       'oneToOne',
       'admin::user'
     > &
@@ -1203,6 +1255,42 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
   };
 }
 
+export interface ApiYusUralYusUral extends Schema.CollectionType {
+  collectionName: 'yus_urals';
+  info: {
+    singularName: 'yus-ural';
+    pluralName: 'yus-urals';
+    displayName: '\u042E\u0441\u0423\u0440\u0430\u043B';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    phone: Attribute.String;
+    email: Attribute.String;
+    home_cover: Attribute.String;
+    church: Attribute.String;
+    city: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::yus-ural.yus-ural',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::yus-ural.yus-ural',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1222,16 +1310,18 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::biznes-konferencziya.biznes-konferencziya': ApiBiznesKonferencziyaBiznesKonferencziya;
       'api::calendar.calendar': ApiCalendarCalendar;
       'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
       'api::event.event': ApiEventEvent;
-      'api::event-item.event-item': ApiEventItemEventItem;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::near-event.near-event': ApiNearEventNearEvent;
+      'api::register-person.register-person': ApiRegisterPersonRegisterPerson;
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::schedule-item.schedule-item': ApiScheduleItemScheduleItem;
       'api::speaker.speaker': ApiSpeakerSpeaker;
+      'api::yus-ural.yus-ural': ApiYusUralYusUral;
     }
   }
 }
