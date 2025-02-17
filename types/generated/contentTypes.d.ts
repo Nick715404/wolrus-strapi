@@ -850,6 +850,8 @@ export interface ApiBiznesKonferencziyaBiznesKonferencziya
     pastor_type: Attribute.String;
     vector: Attribute.String;
     personType: Attribute.String;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
+    personId: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1274,6 +1276,8 @@ export interface ApiYusUralYusUral extends Schema.CollectionType {
     home_cover: Attribute.String;
     church: Attribute.String;
     city: Attribute.String;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
+    personId: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

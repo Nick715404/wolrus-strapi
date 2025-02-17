@@ -41,6 +41,19 @@
     },
     "personType": {
       "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "payed",
+        "notPayed"
+      ]
+    },
+    "personId": {
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }
