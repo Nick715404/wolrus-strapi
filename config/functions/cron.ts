@@ -42,7 +42,7 @@ module.exports = {
       }
     },
     options: {
-      rule: "0 */3 * * *",
+      rule: "* * * * *",
     },
   },
 };
