@@ -852,6 +852,7 @@ export interface ApiBiznesKonferencziyaBiznesKonferencziya
     personType: Attribute.String;
     status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
     personId: Attribute.String & Attribute.Required & Attribute.Unique;
+    registerType: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -975,7 +976,8 @@ export interface ApiEventEvent extends Schema.CollectionType {
       [
         '\u042E\u0441\u0423\u0440\u0430\u043B',
         '\u0422\u0438\u043D\u0441\u0423\u0440\u0430\u043B',
-        '\u0411\u0438\u0437\u043D\u0435\u0441\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F'
+        '\u0411\u0438\u0437\u043D\u0435\u0441\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F',
+        '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F\u0412\u0435\u0440\u044B'
       ]
     >;
     register_persons: Attribute.Relation<
@@ -994,6 +996,48 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFaithConfFaithConf extends Schema.CollectionType {
+  collectionName: 'faith_confs';
+  info: {
+    singularName: 'faith-conf';
+    pluralName: 'faith-confs';
+    displayName: '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F \u0412\u0435\u0440\u044B';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    church: Attribute.String;
+    city: Attribute.String;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'pending'>;
+    personId: Attribute.String & Attribute.Required & Attribute.Unique;
+    registerType: Attribute.String;
+    role: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::faith-conf.faith-conf',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::faith-conf.faith-conf',
       'oneToOne',
       'admin::user'
     > &
@@ -1113,12 +1157,13 @@ export interface ApiRegisterPersonRegisterPerson extends Schema.CollectionType {
         '\u041F\u0430\u0441\u0442\u043E\u0440',
         '\u041F\u043E\u0434\u0440\u043E\u0441\u0442\u043E\u043A',
         '\u041F\u0440\u0435\u0434\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C',
-        '\u041F\u0440\u0438\u0445\u043E\u0436\u0430\u043D\u0438\u043D'
+        '\u041F\u0440\u0438\u0445\u043E\u0436\u0430\u043D\u0438\u043D',
+        '\u041C\u043E\u043B\u043E\u0434\u0435\u0436\u044C'
       ]
     >;
     init_price: Attribute.Integer & Attribute.Required;
-    new_price: Attribute.Integer & Attribute.Required;
-    price_update_date: Attribute.DateTime & Attribute.Required;
+    new_price: Attribute.Integer;
+    price_update_date: Attribute.DateTime;
     events: Attribute.Relation<
       'api::register-person.register-person',
       'manyToMany',
@@ -1226,7 +1271,8 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
   info: {
     singularName: 'speaker';
     pluralName: 'speakers';
-    displayName: 'speaker';
+    displayName: '\u0421\u043F\u0438\u043A\u0435\u0440\u044B';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1318,6 +1364,7 @@ declare module '@strapi/types' {
       'api::calendar.calendar': ApiCalendarCalendar;
       'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
       'api::event.event': ApiEventEvent;
+      'api::faith-conf.faith-conf': ApiFaithConfFaithConf;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::near-event.near-event': ApiNearEventNearEvent;

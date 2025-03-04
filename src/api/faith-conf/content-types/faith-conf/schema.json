@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "biznes_konferencziyas",
+  "collectionName": "faith_confs",
   "info": {
-    "singularName": "biznes-konferencziya",
-    "pluralName": "biznes-konferencziyas",
-    "displayName": "Бизнес Конференция",
+    "singularName": "faith-conf",
+    "pluralName": "faith-confs",
+    "displayName": "Конференция Веры",
     "description": ""
   },
   "options": {
@@ -18,28 +18,16 @@
     "last_name": {
       "type": "string"
     },
-    "sur_name": {
+    "email": {
       "type": "string"
     },
     "phone": {
       "type": "string"
     },
-    "email": {
-      "type": "string"
-    },
     "church": {
       "type": "string"
     },
-    "occupation": {
-      "type": "string"
-    },
-    "pastor_type": {
-      "type": "string"
-    },
-    "vector": {
-      "type": "string"
-    },
-    "personType": {
+    "city": {
       "type": "string"
     },
     "status": {
@@ -48,14 +36,19 @@
         "pending",
         "payed",
         "notPayed"
-      ]
+      ],
+      "default": "pending",
+      "required": true
     },
     "personId": {
       "type": "string",
-      "unique": true,
-      "required": true
+      "required": true,
+      "unique": true
     },
     "registerType": {
+      "type": "string"
+    },
+    "role": {
       "type": "string"
     }
   }
