@@ -975,7 +975,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     event_type: Attribute.Enumeration<
       [
         '\u042E\u0441\u0423\u0440\u0430\u043B',
-        '\u0422\u0438\u043D\u0441\u0423\u0440\u0430\u043B',
+        '\u041E\u0433\u043E\u043D\u044C\u0427\u0435\u043B',
         '\u0411\u0438\u0437\u043D\u0435\u0441\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F',
         '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F\u0412\u0435\u0440\u044B'
       ]
@@ -1038,6 +1038,48 @@ export interface ApiFaithConfFaithConf extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::faith-conf.faith-conf',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFireChelFireChel extends Schema.CollectionType {
+  collectionName: 'fire_chels';
+  info: {
+    singularName: 'fire-chel';
+    pluralName: 'fire-chels';
+    displayName: '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F \u041E\u0433\u043E\u043D\u044C \u0427\u0435\u043B';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    adultName: Attribute.String;
+    adultPhone: Attribute.String;
+    age: Attribute.String;
+    church: Attribute.String;
+    city: Attribute.String;
+    email: Attribute.String;
+    first_name: Attribute.String;
+    homeCover: Attribute.String;
+    last_name: Attribute.String;
+    personType: Attribute.String;
+    phone: Attribute.String;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
+    personId: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::fire-chel.fire-chel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::fire-chel.fire-chel',
       'oneToOne',
       'admin::user'
     > &
@@ -1158,7 +1200,8 @@ export interface ApiRegisterPersonRegisterPerson extends Schema.CollectionType {
         '\u041F\u043E\u0434\u0440\u043E\u0441\u0442\u043E\u043A',
         '\u041F\u0440\u0435\u0434\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C',
         '\u041F\u0440\u0438\u0445\u043E\u0436\u0430\u043D\u0438\u043D',
-        '\u041C\u043E\u043B\u043E\u0434\u0435\u0436\u044C'
+        '\u041C\u043E\u043B\u043E\u0434\u0435\u0436\u044C',
+        '\u0420\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0418\u043B\u0438\u0421\u043B\u0443\u0436\u0438\u0442\u0435\u043B\u044C'
       ]
     >;
     init_price: Attribute.Integer & Attribute.Required;
@@ -1170,6 +1213,7 @@ export interface ApiRegisterPersonRegisterPerson extends Schema.CollectionType {
       'api::event.event'
     >;
     person_title: Attribute.String;
+    label: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1365,6 +1409,7 @@ declare module '@strapi/types' {
       'api::calendar-item.calendar-item': ApiCalendarItemCalendarItem;
       'api::event.event': ApiEventEvent;
       'api::faith-conf.faith-conf': ApiFaithConfFaithConf;
+      'api::fire-chel.fire-chel': ApiFireChelFireChel;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::near-event.near-event': ApiNearEventNearEvent;

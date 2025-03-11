@@ -19,7 +19,8 @@
         "Подросток",
         "Предприниматель",
         "Прихожанин",
-        "Молодежь"
+        "Молодежь",
+        "РодительИлиСлужитель"
       ]
     },
     "init_price": {
@@ -41,6 +42,9 @@
       "inversedBy": "register_persons"
     },
     "person_title": {
+      "type": "string"
+    },
+    "label": {
       "type": "string"
     }
   }

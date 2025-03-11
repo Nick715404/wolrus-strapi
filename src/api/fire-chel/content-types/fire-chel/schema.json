@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fire_chels",
+  "info": {
+    "singularName": "fire-chel",
+    "pluralName": "fire-chels",
+    "displayName": "Конференция Огонь Чел",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "adultName": {
+      "type": "string"
+    },
+    "adultPhone": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
+    },
+    "church": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "homeCover": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "personType": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "payed",
+        "notPayed"
+      ]
+    },
+    "personId": {
+      "type": "string"
+    }
+  }
+}
