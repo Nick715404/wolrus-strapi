@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "youth_mgns",
+  "info": {
+    "singularName": "youth-mgn",
+    "pluralName": "youth-mgns",
+    "displayName": "ЮС Магнитагорск",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "home_cover": {
+      "type": "string"
+    },
+    "church": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "personId": {
+      "type": "string",
+      "unique": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "payed",
+        "notPayed"
+      ]
+    }
+  }
+}
