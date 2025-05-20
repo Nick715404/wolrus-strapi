@@ -4,7 +4,12 @@ export default {
       name: "ExportButton",
       Component: () => {
         const location = window.location.pathname;
-        const collections = ["biznes-konferencziya", "faith-conf", "fire-chel"];
+        const collections = [
+          "biznes-konferencziya",
+          "faith-conf",
+          "fire-chel",
+          "youth-mgn",
+        ];
 
         const isTargetPage = collections.some((collection) =>
           location.includes(
