@@ -1,7 +1,7 @@
 module.exports = {
   paymentManager: {
     task: async ({ strapi }) => {
-      const tablesToCheck = ["biznes-konferencziya", "yus-ural", "faith-conf", "fire-chel"];
+      const tablesToCheck = ["biznes-konferencziya", "yus-ural", "faith-conf", "fire-chel", "youth-mgn"];
 
       for (const table of tablesToCheck) {
         try {

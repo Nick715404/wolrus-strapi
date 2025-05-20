@@ -961,11 +961,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
     slug: Attribute.UID<'api::event.event', 'title'> & Attribute.Required;
     background: Attribute.Media & Attribute.Required;
     gallery: Attribute.Media;
-    speakers: Attribute.Relation<
-      'api::event.event',
-      'oneToMany',
-      'api::speaker.speaker'
-    >;
     schedules: Attribute.Relation<
       'api::event.event',
       'oneToMany',
@@ -984,6 +979,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'api::event.event',
       'manyToMany',
       'api::register-person.register-person'
+    >;
+    speakers: Attribute.Relation<
+      'api::event.event',
+      'manyToMany',
+      'api::speaker.speaker'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1325,9 +1325,9 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    event: Attribute.Relation<
+    events: Attribute.Relation<
       'api::speaker.speaker',
-      'manyToOne',
+      'manyToMany',
       'api::event.event'
     >;
     createdAt: Attribute.DateTime;
@@ -1340,6 +1340,45 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::speaker.speaker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiYouthMgnYouthMgn extends Schema.CollectionType {
+  collectionName: 'youth_mgns';
+  info: {
+    singularName: 'youth-mgn';
+    pluralName: 'youth-mgns';
+    displayName: '\u042E\u0421 \u041C\u0430\u0433\u043D\u0438\u0442\u0430\u0433\u043E\u0440\u0441\u043A';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    phone: Attribute.String;
+    email: Attribute.String;
+    home_cover: Attribute.String;
+    church: Attribute.String;
+    city: Attribute.String;
+    personId: Attribute.String & Attribute.Unique;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::youth-mgn.youth-mgn',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::youth-mgn.youth-mgn',
       'oneToOne',
       'admin::user'
     > &
@@ -1417,6 +1456,7 @@ declare module '@strapi/types' {
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::schedule-item.schedule-item': ApiScheduleItemScheduleItem;
       'api::speaker.speaker': ApiSpeakerSpeaker;
+      'api::youth-mgn.youth-mgn': ApiYouthMgnYouthMgn;
       'api::yus-ural.yus-ural': ApiYusUralYusUral;
     }
   }

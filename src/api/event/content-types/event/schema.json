@@ -41,12 +41,6 @@
         "images"
       ]
     },
-    "speakers": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::speaker.speaker",
-      "mappedBy": "event"
-    },
     "schedules": {
       "type": "relation",
       "relation": "oneToMany",
@@ -69,6 +63,12 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::register-person.register-person",
+      "mappedBy": "events"
+    },
+    "speakers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::speaker.speaker",
       "mappedBy": "events"
     }
   }
