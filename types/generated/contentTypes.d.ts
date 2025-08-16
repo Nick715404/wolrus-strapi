@@ -853,6 +853,7 @@ export interface ApiBiznesKonferencziyaBiznesKonferencziya
     status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
     personId: Attribute.String & Attribute.Required & Attribute.Unique;
     registerType: Attribute.String;
+    city: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1407,6 +1408,7 @@ export interface ApiYusUralYusUral extends Schema.CollectionType {
     city: Attribute.String;
     status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
     personId: Attribute.String & Attribute.Unique;
+    age: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

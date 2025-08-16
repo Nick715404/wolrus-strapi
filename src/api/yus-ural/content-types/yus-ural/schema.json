@@ -44,6 +44,9 @@
     "personId": {
       "type": "string",
       "unique": true
+    },
+    "age": {
+      "type": "string"
     }
   }
 }

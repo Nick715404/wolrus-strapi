@@ -21,7 +21,7 @@ export default {
         if (!isTargetPage) return null;
 
         const actionsContainer = document.querySelector(
-          '.sc-bdvvtL.sc-gsDKAQ.bOQZK.cDqAlZ',
+          '.sc-bdvvtL.sc-gsDKAQ.bOQZK.kaIpyO',
         );
 
         if (actionsContainer && !document.querySelector('#exportButton')) {

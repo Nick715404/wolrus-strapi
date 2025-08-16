@@ -57,6 +57,9 @@
     },
     "registerType": {
       "type": "string"
+    },
+    "city": {
+      "type": "string"
     }
   }
 }
