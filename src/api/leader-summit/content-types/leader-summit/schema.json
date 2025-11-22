@@ -41,6 +41,9 @@
     },
     "price": {
       "type": "string"
+    },
+    "promocode": {
+      "type": "string"
     }
   }
 }
