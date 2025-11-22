@@ -10,6 +10,7 @@ export default {
           'fire-chel',
           'youth-mgn',
           'yus-ural',
+          'leader-summit',
         ];
 
         const isTargetPage = collections.some((collection) =>

@@ -2,11 +2,12 @@ module.exports = {
   paymentManager: {
     task: async ({ strapi }) => {
       const tablesToCheck = [
-        "biznes-konferencziya",
-        "yus-ural",
-        "faith-conf",
-        "fire-chel",
-        "youth-mgn",
+        'biznes-konferencziya',
+        'yus-ural',
+        'faith-conf',
+        'fire-chel',
+        'youth-mgn',
+        'leader-summit',
       ];
 
       for (const table of tablesToCheck) {
@@ -20,7 +21,7 @@ module.exports = {
             .query(`api::${table}.${table}`)
             .findMany({
               where: {
-                status: "pending",
+                status: 'pending',
                 createdAt: { $lt: thirtyMinutesAgo.toISOString() },
               },
             });
@@ -28,7 +29,7 @@ module.exports = {
           console.log(pendingRecords);
 
           console.log(
-            `Found ${pendingRecords.length} pending records in table ${table}`
+            `Found ${pendingRecords.length} pending records in table ${table}`,
           );
 
           for (const record of pendingRecords) {
@@ -36,7 +37,7 @@ module.exports = {
               where: { id: record.id },
             });
             console.log(
-              `Deleted record with ID ${record.id} from table ${table}`
+              `Deleted record with ID ${record.id} from table ${table}`,
             );
           }
         } catch (error) {
@@ -48,7 +49,7 @@ module.exports = {
       }
     },
     options: {
-      rule: "0 */3 * * *",
+      rule: '0 */3 * * *',
     },
   },
 };

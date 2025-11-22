@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leader_summits",
+  "info": {
+    "singularName": "leader-summit",
+    "pluralName": "leader-summits",
+    "displayName": "Саммит Лидеров",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "church": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "payed",
+        "notPayed"
+      ]
+    },
+    "personId": {
+      "type": "string",
+      "unique": true
+    },
+    "price": {
+      "type": "string"
+    }
+  }
+}

@@ -973,7 +973,8 @@ export interface ApiEventEvent extends Schema.CollectionType {
         '\u042E\u0441\u0423\u0440\u0430\u043B',
         '\u041E\u0433\u043E\u043D\u044C\u0427\u0435\u043B',
         '\u0411\u0438\u0437\u043D\u0435\u0441\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F',
-        '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F\u0412\u0435\u0440\u044B'
+        '\u041A\u043E\u043D\u0444\u0435\u0440\u0435\u043D\u0446\u0438\u044F\u0412\u0435\u0440\u044B',
+        '\u0421\u0430\u043C\u043C\u0438\u0442\u041B\u0438\u0434\u0435\u0440\u043E\u0432',
       ]
     >;
     register_persons: Attribute.Relation<
@@ -1119,6 +1120,44 @@ export interface ApiLastSpeechLastSpeech extends Schema.CollectionType {
   };
 }
 
+export interface ApiLeaderSummitLeaderSummit extends Schema.CollectionType {
+  collectionName: 'leader_summits';
+  info: {
+    singularName: 'leader-summit';
+    pluralName: 'leader-summits';
+    displayName: '\u0421\u0430\u043C\u043C\u0438\u0442 \u041B\u0438\u0434\u0435\u0440\u043E\u0432';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    phone: Attribute.String;
+    email: Attribute.String;
+    church: Attribute.String;
+    status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
+    personId: Attribute.String & Attribute.Unique;
+    price: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::leader-summit.leader-summit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::leader-summit.leader-summit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMessageForYearMessageForYear extends Schema.CollectionType {
   collectionName: 'message_for_years';
   info: {
@@ -1202,7 +1241,7 @@ export interface ApiRegisterPersonRegisterPerson extends Schema.CollectionType {
         '\u041F\u0440\u0435\u0434\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C',
         '\u041F\u0440\u0438\u0445\u043E\u0436\u0430\u043D\u0438\u043D',
         '\u041C\u043E\u043B\u043E\u0434\u0435\u0436\u044C',
-        '\u0420\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0418\u043B\u0438\u0421\u043B\u0443\u0436\u0438\u0442\u0435\u043B\u044C'
+        '\u0420\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u0418\u043B\u0438\u0421\u043B\u0443\u0436\u0438\u0442\u0435\u043B\u044C',
       ]
     >;
     init_price: Attribute.Integer & Attribute.Required;
@@ -1452,6 +1491,7 @@ declare module '@strapi/types' {
       'api::faith-conf.faith-conf': ApiFaithConfFaithConf;
       'api::fire-chel.fire-chel': ApiFireChelFireChel;
       'api::last-speech.last-speech': ApiLastSpeechLastSpeech;
+      'api::leader-summit.leader-summit': ApiLeaderSummitLeaderSummit;
       'api::message-for-year.message-for-year': ApiMessageForYearMessageForYear;
       'api::near-event.near-event': ApiNearEventNearEvent;
       'api::register-person.register-person': ApiRegisterPersonRegisterPerson;
