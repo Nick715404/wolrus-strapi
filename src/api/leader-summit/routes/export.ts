@@ -2,7 +2,7 @@ module.exports = {
   routes: [
     {
       method: 'GET',
-      path: '/yus-ural/export',
+      path: '/leader-summit/export',
       handler: 'export.exportExcel',
     },
   ],
