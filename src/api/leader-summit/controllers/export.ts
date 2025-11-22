@@ -38,10 +38,7 @@ export default {
         'Content-Type',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       );
-      ctx.set(
-        'Content-Disposition',
-        'attachment; filename="youth-ural-reg.xlsx"',
-      );
+      ctx.set('Content-Disposition', 'attachment; filename="gsl.xlsx"');
       ctx.body = fs.createReadStream(filePath);
     } catch (error) {
       ctx.throw(500, 'Ошибка при экспорте данных');
