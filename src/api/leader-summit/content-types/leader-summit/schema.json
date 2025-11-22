@@ -39,11 +39,11 @@
       "type": "string",
       "unique": true
     },
-    "price": {
-      "type": "string"
-    },
     "promocode": {
       "type": "string"
+    },
+    "price": {
+      "type": "integer"
     }
   }
 }

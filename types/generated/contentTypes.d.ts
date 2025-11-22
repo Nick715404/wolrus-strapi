@@ -1139,8 +1139,8 @@ export interface ApiLeaderSummitLeaderSummit extends Schema.CollectionType {
     church: Attribute.String;
     status: Attribute.Enumeration<['pending', 'payed', 'notPayed']>;
     personId: Attribute.String & Attribute.Unique;
-    price: Attribute.String;
     promocode: Attribute.String;
+    price: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
